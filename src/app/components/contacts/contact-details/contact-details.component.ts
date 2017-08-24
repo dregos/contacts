@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { contacts } from '../contacts';
+import { ContactsService } from '../../../shared/services/contacts.service';
 
 @Component({
   selector: 'app-contact-details',
@@ -9,14 +9,16 @@ import { contacts } from '../contacts';
 })
 export class ContactDetailsComponent implements OnInit {
 
-	private contact: any;
+	private contact: any = {};
   
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private contactService: ContactsService) { }
 
   ngOnInit() {
   	this.route.params.subscribe(()=>{
   		let id = parseInt(this.route.snapshot.paramMap.get('id'));
-  		this.contact = contacts.find(contact => contact['id'] == id);
+    		this.contactService.getContacts().subscribe((data:any[]) => {
+          this.contact = data.find(contact => contact['id'] == id);
+        });
   	});
   }
 
