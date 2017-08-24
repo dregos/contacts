@@ -1,0 +1,19 @@
+<h1>Contacts</h1> 
+<table class="table table-striped">  
+	<thead>    
+		<tr>      
+			<th>Name</th>      
+			<th>Email</th>      
+			<th>Actions</th>    
+		</tr>  
+	</thead>  
+	<tbody>    
+		<tr *ngFor="let contact of contacts">      
+			<td class="align-middle"><a [routerLink]="['/contacts', contact.id]">{{ contact.firstName }} {{ contact.lastName }}</a></td>      
+			<td class="align-middle">{{ contact.email | uppercase }}</td>      
+			<td><button class="btn btn-danger btn-sm" (click)="remove(contact)">Remove</button></td>    
+		</tr> 
+	</tbody>
+</table>
+
+<router-outlet></router-outlet>
