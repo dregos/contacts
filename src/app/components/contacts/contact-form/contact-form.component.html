@@ -1,0 +1,60 @@
+<form #contactForm="ngForm" (ngSubmit)="submitContact(newContact); contactForm.reset()">
+	<div class="form-group">
+		<label>First Name</label>
+		<input #firstName="ngModel" minlength="2" [(ngModel)]="newContact.firstName" class="form-control" name="firstName" required>
+
+		<div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+			<div *ngIf="firstName.errors.required">
+				First name is required
+			</div>
+			<div *ngIf="firstName.errors.minlength">
+				First name Must be at least 2 chars long.
+			</div>
+		</div>
+
+	</div>
+
+	<div class="form-group">
+		<label>Last Name</label>
+		<input #lastName="ngModel" minlength="2" [(ngModel)]="newContact.lastName" class="form-control" name="lastName" required>
+
+		<div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+			<div *ngIf="lastName.errors.required">
+				Last name is required
+			</div>
+			<div *ngIf="lastName.errors.minlength">
+				Last name Must be at least 2 chars long.
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label>email</label>
+		<input #email="ngModel" email [(ngModel)]="newContact.email" class="form-control" name="email" required>
+
+		<div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+			<div *ngIf="email.errors.required">
+				Email is required
+			</div>
+			<div *ngIf="email.errors.email">
+				Email is must be a type of email
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group" *ngIf="email.dirty">
+		<label>Confirm email</label>
+		<input #confirmEmail="ngModel" email [(ngModel)]="newContact.confirmEmail" class="form-control" name="confirmEmail" required [equalTo]="email">
+
+		<div *ngIf="confirmEmail.invalid && ( confirmEmail.dirty || confirmEmail.touched)" class="alert alert-danger">
+			<div *ngIf="confirmEmail.errors.required">
+				confirmEmail is required
+			</div>
+			<div *ngIf="confirmEmail.errors.equalTo">
+				Email must match
+			</div>
+		</div>
+	</div>
+ 
+	<button type="submit" class="btn btn-primary" [disabled]="!contactForm.valid">{{newContact.id ? 'Save' : 'Add'}}</button>
+	<button class="btn" [disabled]="contactForm.pristine" (click)="contactForm.reset()">Reset</button>
+</form>

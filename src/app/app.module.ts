@@ -11,7 +11,8 @@ import { ContactsComponent } from './components/contacts/contacts.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { ContactDetailsComponent } from './components/contacts/contact-details/contact-details.component';
-
+import { ContactFormComponent } from './components/contacts/contact-form/contact-form.component';
+import { ContactRowComponent } from './components/contacts/contact-row/contact-row.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { ContactDetailsComponent } from './components/contacts/contact-details/c
     ContactsComponent,
     LayoutComponent,
     MessagesComponent,
-    ContactDetailsComponent
+    ContactDetailsComponent,
+    ContactFormComponent,
+    ContactRowComponent
   ],
   imports: [
     BrowserModule,

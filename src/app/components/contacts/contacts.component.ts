@@ -13,8 +13,6 @@ export class ContactsComponent {
 	private contacts: any[] = [];
 	private filter: string = '';
 
-	private newContact: Contact = new Contact();
-
 	constructor (private contactService: ContactsService){
 		contactService.getContacts().subscribe(data => {
 			this.contacts = data;
@@ -28,12 +26,22 @@ export class ContactsComponent {
 		this.contacts.splice(index,1);
 	}
 
-	addContact(){
-		this.contactService.addContact(this.newContact)
-		.subscribe(contact =>{
-			this.contacts.push(contact);
-			this.newContact = new Contact();
-		});
+	submitContact(newContact){
+    if(newContact.id){
+      this.contactService.editContact(newContact)
+        .subscribe((contact: Contact) => {
+          let oldContact = this.contacts.filter(c => c.id == contact.id);
+          if (oldContact.length){
+            Object.assign(oldContact[0], contact);
+          }
+        });
+    } else {
+      this.contactService.addContact(newContact)
+        .subscribe(contact =>{
+          this.contacts.push(contact);
+        });
+    }
+		
 	}
 	
 }
