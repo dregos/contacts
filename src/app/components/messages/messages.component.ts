@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PageTitleService } from '../../shared/services/page-title.service';  
 
 @Component({
   selector: 'app-messages',
@@ -6,7 +7,10 @@ import { Component } from '@angular/core';
 })
 export class MessagesComponent {
 
-  constructor() { }
+  constructor(private pageTitleService: PageTitleService) {
+    pageTitleService.setTitle('Your messages');
+
+  }
 
 
 }
